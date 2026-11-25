@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="GDMexico\AdminActionLog\Model\ResourceModel\ActionLog\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">gdm_admin_action_log</argument>
+            <argument name="resourceModel" xsi:type="string">GDMexico\AdminActionLog\Model\ResourceModel\ActionLog</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="gdm_actionlog_listing_data_source" xsi:type="string">GDMexico\AdminActionLog\Model\ResourceModel\ActionLog\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="GDMexico\AdminActionLog\Model\RequestLogger">
+        <arguments>
+            <argument name="ignoredActions" xsi:type="array">
+                <item name="auth_login" xsi:type="string">adminhtml_auth_login</item>
+                <item name="bookmark_save" xsi:type="string">mui_bookmark_save</item>
+                <item name="global_search" xsi:type="string">adminhtml_index_globalSearch</item>
+                <item name="notification_ajax" xsi:type="string">adminhtml_notification_ajaxMarkAsRead</item>
+                <item name="system_message" xsi:type="string">adminhtml_system_message_list</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Action group label per full-action-name prefix (longest prefix wins). -->
+    <type name="GDMexico\AdminActionLog\Model\ActionResolver">
+        <arguments>
+            <argument name="groups" xsi:type="array">
+                <item name="adminhtml_auth" xsi:type="string">Admin Sign-in</item>
+                <item name="adminhtml_system_config" xsi:type="string">System Configuration</item>
+                <item name="adminhtml_cache" xsi:type="string">Cache Management</item>
+                <item name="adminhtml_system_currency" xsi:type="string">Currency</item>
+                <item name="adminhtml_system_store" xsi:type="string">Stores</item>
+                <item name="adminhtml_system_design" xsi:type="string">Design</item>
+                <item name="adminhtml_user_role" xsi:type="string">User Roles</item>
+                <item name="adminhtml_user" xsi:type="string">Admin Users</item>
+                <item name="adminhtml_url_rewrite" xsi:type="string">URL Rewrites</item>
+                <item name="adminhtml_import" xsi:type="string">Import</item>
+                <item name="adminhtml_export" xsi:type="string">Export</item>
+                <item name="theme_design_config" xsi:type="string">Design Configuration</item>
+                <item name="theme_design" xsi:type="string">Design</item>
+                <item name="catalog_product_attribute" xsi:type="string">Product Attributes</item>
+                <item name="catalog_product_set" xsi:type="string">Attribute Sets</item>
+                <item name="catalog_product" xsi:type="string">Products</item>
+                <item name="catalog_category" xsi:type="string">Categories</item>
+                <item name="catalog_rule" xsi:type="string">Catalog Price Rules</item>
+                <item name="sales_rule" xsi:type="string">Cart Price Rules</item>
+                <item name="sales_order_invoice" xsi:type="string">Invoices</item>
+                <item name="sales_order_shipment" xsi:type="string">Shipments</item>
+                <item name="sales_order_creditmemo" xsi:type="string">Credit Memos</item>
+                <item name="sales_order" xsi:type="string">Sales Orders</item>
+                <item name="sales_invoice" xsi:type="string">Invoices</item>
+                <item name="sales_shipment" xsi:type="string">Shipments</item>
+                <item name="sales_creditmemo" xsi:type="string">Credit Memos</item>
+                <item name="customer_group" xsi:type="string">Customer Groups</item>
+                <item name="customer" xsi:type="string">Customers</item>
+                <item name="cms_page" xsi:type="string">CMS Pages</item>
+                <item name="cms_block" xsi:type="string">CMS Blocks</item>
+                <item name="indexer" xsi:type="string">Index Management</item>
+                <item name="tax" xsi:type="string">Taxes</item>
+                <item name="newsletter" xsi:type="string">Newsletter</item>
+                <item name="review" xsi:type="string">Reviews</item>
+                <item name="admin_system_config" xsi:type="string">System Configuration</item>
+                <item name="mui_export" xsi:type="string">Export</item>
+                <item name="mui" xsi:type="string">Grids</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Models that are never logged (and their subclasses). Extend here per site if needed. -->
+    <type name="GDMexico\AdminActionLog\Model\ChangeDetector">
+        <arguments>
+            <argument name="ignoredClasses" xsi:type="array">
+                <item name="flag" xsi:type="string">Magento\Framework\Flag</item>
+                <item name="indexer_state" xsi:type="string">Magento\Indexer\Model\Indexer\State</item>
+                <item name="cron_schedule" xsi:type="string">Magento\Cron\Model\Schedule</item>
+                <item name="admin_notification" xsi:type="string">Magento\AdminNotification\Model\Inbox</item>
+                <item name="url_rewrite" xsi:type="string">Magento\UrlRewrite\Model\UrlRewrite</item>
+                <item name="oauth_token" xsi:type="string">Magento\Integration\Model\Oauth\Token</item>
+                <item name="admin_session" xsi:type="string">Magento\Security\Model\AdminSessionInfo</item>
+                <item name="password_reset_request" xsi:type="string">Magento\Security\Model\PasswordResetRequestEvent</item>
+            </argument>
+            <argument name="ignoredFields" xsi:type="array">
+                <item name="created_at" xsi:type="string">created_at</item>
+                <item name="updated_at" xsi:type="string">updated_at</item>
+                <item name="creation_time" xsi:type="string">creation_time</item>
+                <item name="update_time" xsi:type="string">update_time</item>
+                <item name="modified" xsi:type="string">modified</item>
+                <item name="logdate" xsi:type="string">logdate</item>
+                <item name="lognum" xsi:type="string">lognum</item>
+                <item name="extra" xsi:type="string">extra</item>
+                <item name="reload_acl_flag" xsi:type="string">reload_acl_flag</item>
+                <item name="form_key" xsi:type="string">form_key</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

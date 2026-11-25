@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <gdm_actionlog>
+            <general>
+                <enabled>1</enabled>
+                <log_views>0</log_views>
+                <retention_days>90</retention_days>
+                <cleanup_time>03,30,00</cleanup_time>
+                <cron_expr>30 3 * * *</cron_expr>
+            </general>
+        </gdm_actionlog>
+    </default>
+</config>

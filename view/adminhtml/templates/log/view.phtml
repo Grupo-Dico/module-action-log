@@ -1,0 +1,66 @@
+<?php
+/** @var \GDMexico\AdminActionLog\Block\Adminhtml\Log\View $block */
+$row = $block->getRow();
+?>
+<p><a href="<?= $block->escapeUrl($block->getBackUrl()) ?>">&laquo; <?= $block->escapeHtml(__('Back to Action Log')) ?></a></p>
+<?php if (!$row): ?>
+    <div class="message message-warning"><?= $block->escapeHtml(__('Record not found.')) ?></div>
+<?php else: ?>
+    <div class="admin__table-wrapper">
+        <table class="data-grid">
+            <tbody>
+            <?php foreach ([
+                'ID' => $row['log_id'],
+                'Time' => $row['created_at'] . ' UTC',
+                'User' => $row['username'],
+                'IP' => $row['ip'],
+                'Action Group' => $row['action_group'],
+                'Action' => $row['action'],
+                'Result' => $row['result'],
+                'Full Action Name' => $row['request_action'],
+                'Details' => $row['details'],
+            ] as $label => $value): ?>
+                <tr>
+                    <th><?= $block->escapeHtml(__($label)) ?></th>
+                    <td><?= $block->escapeHtml((string)$value) ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?php $entities = $block->getEntities(); ?>
+    <?php if (!$entities): ?>
+        <p><?= $block->escapeHtml(__('No data changes were recorded for this action.')) ?></p>
+    <?php endif; ?>
+    <?php foreach ($entities as $entity): ?>
+        <h3>
+            <?= $block->escapeHtml(strtoupper((string)($entity['action'] ?? ''))) ?>
+            <?= $block->escapeHtml((string)($entity['type'] ?? '')) ?>
+            #<?= $block->escapeHtml((string)($entity['id'] ?? '')) ?>
+            <?php if (!empty($entity['label'])): ?>
+                &ndash; <?= $block->escapeHtml((string)$entity['label']) ?>
+            <?php endif; ?>
+        </h3>
+        <div class="admin__table-wrapper">
+            <table class="data-grid">
+                <thead>
+                <tr>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('Field')) ?></th>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('Old value')) ?></th>
+                    <th class="data-grid-th"><?= $block->escapeHtml(__('New value')) ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ((array)($entity['changes'] ?? []) as $field => $pair): ?>
+                    <tr>
+                        <td><?= $block->escapeHtml((string)$field) ?></td>
+                        <td><?= $block->escapeHtml((string)($pair['old'] ?? '')) ?></td>
+                        <td><?= $block->escapeHtml((string)($pair['new'] ?? '')) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>

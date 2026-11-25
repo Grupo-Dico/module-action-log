@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="GDMexico_AdminActionLog::actionlog" title="Action Log" translate="title" module="GDMexico_AdminActionLog" parent="Magento_Backend::system_tools" sortOrder="90" action="gdm_actionlog/log/index" resource="GDMexico_AdminActionLog::actionlog"/>
+    </menu>
+</config>

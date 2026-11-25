@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="gdmexico" translate="label" sortOrder="300">
+            <label>GD México</label>
+        </tab>
+        <section id="gdm_actionlog" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Admin Action Log</label>
+            <tab>gdmexico</tab>
+            <resource>GDMexico_AdminActionLog::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Action Log</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="log_views" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Log Views and Listings</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Also record page views and grid listings. Generates a lot of records; saves, deletes, mass actions, exports, cache flushes and logins are always recorded.</comment>
+                </field>
+                <field id="retention_days" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Keep Records For</label>
+                    <source_model>GDMexico\AdminActionLog\Model\Source\Retention</source_model>
+                    <comment>Older records are deleted daily by cron. Export the log before shortening this period.</comment>
+                </field>
+                <field id="cleanup_time" translate="label comment" type="time" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cleanup Time</label>
+                    <backend_model>GDMexico\AdminActionLog\Model\Config\Backend\CleanupTime</backend_model>
+                    <comment>Time of day when the cleanup cron runs. Requires the Magento cron to be active.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

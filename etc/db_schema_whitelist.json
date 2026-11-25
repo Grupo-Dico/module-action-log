@@ -1,0 +1,28 @@
+{
+    "gdm_admin_action_log": {
+        "column": {
+            "log_id": true,
+            "created_at": true,
+            "user_id": true,
+            "username": true,
+            "ip": true,
+            "action_group": true,
+            "action": true,
+            "result": true,
+            "entity_type": true,
+            "entity_id": true,
+            "entity_label": true,
+            "request_action": true,
+            "details": true,
+            "changes": true
+        },
+        "index": {
+            "GDM_ADMIN_ACTION_LOG_CREATED_AT": true,
+            "GDM_ADMIN_ACTION_LOG_USER_ID": true,
+            "GDM_ADMIN_ACTION_LOG_ACTION": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
